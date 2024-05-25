@@ -37,13 +37,14 @@ public class DictionManager : MonoBehaviour
     {
         if (cause == DictationCompletionCause.TimeoutExceeded)
         {
-            connectionManager.sendData(DictationDisplay.text);
-            DictationDisplay.text = null;
-            dictationRecognizer.Stop();
-            while (!connectionManager.isLock)
-            {
+            if (DictationDisplay.text != "")
+            { 
+                connectionManager.sendData(DictationDisplay.text);
+                DictationDisplay.text = "";
+                connectionManager.recieveData();
+                dictationRecognizer.Stop();
+                dictationRecognizer.Start();
             }
-            dictationRecognizer.Start();
         }
     }
 
