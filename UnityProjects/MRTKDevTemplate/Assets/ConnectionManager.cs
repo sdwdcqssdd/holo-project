@@ -9,22 +9,15 @@ using System.Text;
 public class ConnectionManager : MonoBehaviour
 {
     private Socket clientSocket;
-    private string serverIP;
-    private int serverPort;
+    private string serverIP = "10.12.107.76";
+    private int serverPort = 5000;
     public bool isLock = false;
     public OutputManager outputManager;
     // Start is called before the first frame update
     void Start()
     {
         clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        try
-        {
-            clientSocket.Connect(serverIP, serverPort);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("An error occurred: " + e.Message);
-        }
+        clientSocket.Connect(serverIP, serverPort);
     }
 
     // Update is called once per frame
